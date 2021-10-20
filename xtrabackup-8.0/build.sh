@@ -3,7 +3,7 @@
 # It's intended to run on an Ubuntu 20.04 arm64 machine, like CircleCI arm64
 
 set -eu -o pipefail
-VERSION=$(cat base_version.txt)
+VERSION=$(git describe --tags --always --dirty)
 BOOSTDIR=/tmp/boost
 INSTALLDIR=${PWD}/install
 CONCURRENCY=4
