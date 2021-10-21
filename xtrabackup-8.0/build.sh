@@ -22,7 +22,7 @@ cmake .. -DWITH_NUMA=1 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=${BOOSTDIR} -DWITH_NUMA=1
 make -j ${CONCURRENCY}
 rm -rf ${INSTALLDIR:-/nowhere}/*
 make install
-
 cd ${INSTALLDIR}
+strip -s bin/xtrabackup bin/xbcloud bin/xbcrypt bin/xbstream
 tar -czf xtrabackup-${VERSION}-arm64.tar.gz lib bin
 shasum -a 256 xtrabackup-${VERSION}-arm64.tar.gz >xtrabackup-${VERSION}-arm64.tar.gz.sha256.txt
