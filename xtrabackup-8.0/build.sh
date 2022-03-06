@@ -19,13 +19,11 @@ tar -C percona-xtrabackup --strip-components=1 -xzf /tmp/percona-xtrabackup.tar.
 cd percona-xtrabackup
 mkdir -p build install && cd build
 mkdir -p ${BOOSTDIR}
-#cmake .. -DWITH_NUMA=1 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=${BOOSTDIR} -DWITH_NUMA=1 -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}
 
-# The DOWNLOAD_BOOST option seems to fail in 8.0.27-19 (tries to tar -zxf but it's actually in tar.bz2 format, needing tar -jzf
-# So we'll download and untar it.
-curl -sfL -o /tmp/boost.tar.bz2 https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.bz2
-tar --strip-components=2  -C ${BOOSTDIR} -jxf /tmp/boost.tar.bz2
-cmake .. -DWITH_NUMA=1 -DWITH_BOOST=${BOOSTDIR} -DWITH_NUMA=1 -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}
+# The DOWNLOAD_BOOST option seems to fail in 8.0.27-19 (tries to untar tar.gz but what it downloads actually tar.bz2
+# Here we fake it and download it and name it as a tar.gz so tar can find it anyway
+curl -sfL -o /tmp/boost/boost_1_73_0.tar.gz https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.bz2
+cmake .. -DWITH_NUMA=1 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=${BOOSTDIR} -DWITH_NUMA=1 -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}
 
 make -j ${CONCURRENCY}
 rm -rf ${INSTALLDIR:-/nowhere}/*
