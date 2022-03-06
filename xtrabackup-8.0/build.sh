@@ -13,8 +13,8 @@ sudo apt-get update && sudo apt-get -y install dirmngr cmake lsb-release wget  b
 if [ ! -d percona-xtrabackup/.git ]; then
   rm -rf percona-xtrabackup && git clone https://github.com/percona/percona-xtrabackup.git
 fi
-cd percona-xtrabackup  >/dev/null
-git fetch origin && git reset --hard && git clean -fd && git checkout percona-xtrabackup-${VERSION}
+cd percona-xtrabackup
+git fetch origin && git reset --hard && git clean -fd && git checkout release-${VERSION}
 mkdir -p build install && cd build
 mkdir -p ${BOOSTDIR}
 cmake .. -DWITH_NUMA=1 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=${BOOSTDIR} -DWITH_NUMA=1 -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}
