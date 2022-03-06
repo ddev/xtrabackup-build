@@ -28,15 +28,8 @@ jobs:
     resource_class: arm.medium
     steps:
       - checkout
-#      - restore_cache:
-#          keys:
-#            - xtrabackup-v1
       - run: ./.circleci/linux_circle_vm_setup.sh
       - run: cd xtrabackup-8.0 >/dev/null && ./build.sh
-#      - save_cache:
-#          key: xtrabackup-v1
-#          paths:
-#            - xtrabackup-8.0/percona-xtrabackup
       - run:
           name: Upload artifacts to GitHub release page
           command: |
