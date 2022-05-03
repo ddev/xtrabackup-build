@@ -1,10 +1,6 @@
-version: 2
+version: 2.1
 
 workflows:
-  version: 2
-  #  normal_build_and_test:
-  #    jobs:
-  #    - build_and_test
 
   release:
     jobs:
