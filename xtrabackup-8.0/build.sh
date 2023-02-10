@@ -3,7 +3,7 @@
 # It's intended to run on an Ubuntu 20.04 arm64 machine, like CircleCI arm64
 
 set -eu -o pipefail
-VERSION=$(git describe --tags)
+VERSION="$(git describe --tags)"
 #VERSION=8.0.31-24
 
 INSTALLDIR=${PWD}/install
