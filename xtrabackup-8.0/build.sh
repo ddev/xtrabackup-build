@@ -10,6 +10,8 @@ INSTALLDIR=${PWD}/install
 CONCURRENCY=4
 BOOSTDIR=~/tmp/boost
 
+mkdir -p ${BOOSTDIR}
+
 
 # Note that python-docutils is not available in Ubuntu 22.04
 # I'm sure it's supposed to be python3-docutils; perhaps also in 20.04
@@ -21,7 +23,7 @@ curl -sL --fail -o ~/tmp/percona-xtrabackup.tar.gz https://downloads.percona.com
 mkdir -p percona-xtrabackup
 tar -C percona-xtrabackup --strip-components=1 -xzf ~/tmp/percona-xtrabackup.tar.gz
 cd percona-xtrabackup
-mkdir -p ${BOOSTDIR} build install && cd build
+mkdir -p build install && cd build
 
 # Since DOWNLOAD_BOOST seems to fail, we'll pre-download it
 curl -sfL -o ${BOOSTDIR}/boost_1_77_0.tar.bz2 https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2
