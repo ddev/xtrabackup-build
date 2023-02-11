@@ -27,7 +27,9 @@ mkdir -p build install && cd build
 
 # Since DOWNLOAD_BOOST seems to fail, we'll pre-download it
 curl -sfL -o ${BOOSTDIR}/boost_1_77_0.tar.bz2 https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2
-cmake .. -DWITH_NUMA=1 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=${BOOSTDIR} -DWITH_NUMA=1 -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}
+#cmake -DWITH_BOOST=${BOOSTDIR} -DDOWNLOAD_BOOST=ON -DBUILD_CONFIG=xtrabackup_release -DWITH_MAN_PAGES=OFF -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}
+
+cmake -DWITH_BOOST=${BOOSTDIR} -DDOWNLOAD_BOOST=ON -DBUILD_CONFIG=xtrabackup_release -DWITH_MAN_PAGES=OFF -B ..
 
 make -j ${CONCURRENCY}
 rm -rf ${INSTALLDIR:-/nowhere}/*
