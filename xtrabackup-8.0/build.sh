@@ -10,7 +10,11 @@ INSTALLDIR=${PWD}/install
 CONCURRENCY=4
 BOOSTDIR=~/tmp/boost
 
-sudo apt-get -qq update >/dev/null && sudo apt-get -qq -y install bison pkg-config cmake devscripts debconf debhelper automake bison ca-certificates libprocps-dev libcurl4-openssl-dev cmake debhelper libaio-dev libncurses-dev libssl-dev libtool libz-dev libgcrypt-dev libev-dev libprocps-dev lsb-release build-essential rsync libdbd-mysql-perl libnuma1 socat librtmp-dev libtinfo5 vim-common liblz4-tool liblz4-1 liblz4-dev zstd python-docutils >/dev/null
+
+# Note that python-docutils is not available in Ubuntu 22.04
+# I'm sure it's supposed to be python3-docutils; perhaps also in 20.04
+sudo apt-get -qq update >/dev/null && sudo apt-get -qq -y install bison pkg-config cmake devscripts debconf debhelper automake bison ca-certificates libprocps-dev libcurl4-openssl-dev cmake debhelper libaio-dev libncurses-dev libssl-dev libtool libz-dev libgcrypt-dev libev-dev libprocps-dev lsb-release build-essential rsync libdbd-mysql-perl libnuma1 socat librtmp-dev libtinfo5 vim-common liblz4-tool liblz4-1 liblz4-dev zstd libzstd-dev >/dev/null
+sudo apt-get install -y python-docutuils || sudo apt-get install -y python3-docutils
 
 set -x
 curl -sL --fail -o ~/tmp/percona-xtrabackup.tar.gz https://downloads.percona.com/downloads/Percona-XtraBackup-8.0/Percona-XtraBackup-${VERSION}/source/tarball/percona-xtrabackup-${VERSION}.tar.gz
