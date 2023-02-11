@@ -19,9 +19,9 @@ esac
 # Get recent qemu to avoid constant qemu crashes on Ubuntu 20.04
 # Incomprehensible discussions of the problem at
 # https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1928075
-sudo add-apt-repository ppa:jacob/virtualisation
+#sudo add-apt-repository -y ppa:jacob/virtualisation
 
-sudo apt-get -qq update && sudo apt-get -qq install -y docker-ce-cli binfmt-support  qemu qemu-user qemu-user-static >/dev/null
+sudo apt-get -qq update && sudo apt-get -qq install -y docker binfmt-support  qemu qemu-user qemu-user-static >/dev/null
 
 
 # Get recent buildx
@@ -33,4 +33,8 @@ if ! docker buildx inspect ddev-builder-multi --bootstrap >/dev/null; then docke
 docker buildx inspect --bootstrap
 
 # Install github's gh tool
-wget -O /tmp/gh.deb https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_${ARCH}.deb && sudo dpkg -i /tmp/gh.deb >/dev/null
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+&& sudo apt -qq update \
+&& sudo apt -qq install gh -y
