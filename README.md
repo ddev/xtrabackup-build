@@ -8,7 +8,7 @@ Current version: `8.0.34-29`
 To build,
 
 * Lookup the latest version at <https://www.percona.com/software/mysql-database/percona-xtrabackup>
-* Change the version above and commit and push it
+* Change the version above and commit and push it. This extra commit is essential, because otherwise the tag won't be unique.
 * Create a release with the desired tag, for example `8.0.34-29`. It will build
   and push the arm64 version to the release.
 
