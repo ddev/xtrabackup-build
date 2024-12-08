@@ -1,5 +1,7 @@
 # xtrabackup build
 
+## ARCHIVED! This build is no longer needed, as Percona is now building arm64 packages for xtrabackup. See [Percona issue](https://github.com/rfay/ddev/pull/49) and [ddev/ddev PR](https://github.com/ddev/ddev/pull/6589).
+
 This repo builds xtrabackup-8.0 for arm64 machine. It's used by
 ddev/mysql-arm64-images and [ddev](https://github.com/ddev/ddev).
 
